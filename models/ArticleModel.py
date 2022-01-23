@@ -5,6 +5,7 @@ class ArticleModel(Article):
 
     @property
     def serialize(self):
+        
         return {
             'id': self.id,
             'name': self.name,

@@ -1,3 +1,4 @@
+from flask import jsonify
 from .Models import Category
 
 class CategoryModel(Category):
@@ -8,6 +9,12 @@ class CategoryModel(Category):
             "id":self.id,
             "name":self.name
         }
+
+    def get_all_categories():
+
+        data = CategoryModel.get_all()
+
+        return data
 
     def insert_category(data):
         data = CategoryModel.insert(data)
