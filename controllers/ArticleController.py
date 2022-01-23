@@ -1,16 +1,16 @@
 from flask import request, jsonify
-from models.Article import Article
+from models.ArticleModel import ArticleModel
 
 
 def store():
     data = request.get_json()
-    response = Article.insert_article(data)
+    response = ArticleModel.insert_article(data)
         
     return response
 
 def show_all():
     
-    data = Article.get_all_articles()
+    data = ArticleModel.get_all_articles()
     
     return jsonify(data)
 
@@ -18,7 +18,7 @@ def delete():
 
     id = request.get_json()["id"]
 
-    done = Article.remove_article(id)
+    done = ArticleModel.delete_article(id)
 
     return {
         "status":done
@@ -28,12 +28,12 @@ def update():
 
     data = request.get_json()
 
-    response = Article.update_article(data)
+    response = ArticleModel.update_article(data)
 
     return response
 
 def show(id):
 
-    data = Article.get_article(id)
+    data = ArticleModel.get_article(id)
 
     return data
