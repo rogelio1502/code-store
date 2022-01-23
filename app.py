@@ -3,7 +3,7 @@ from flask_migrate import Migrate
 
 from models import db
 
-from routes.store_blueprint import storebp
+from routes.article_blueprint import article
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -11,7 +11,7 @@ app.config.from_object('config')
 db.init_app(app)
 migrate = Migrate(app, db)
 
-app.register_blueprint(storebp, url_prefix='/store')
+app.register_blueprint(article, url_prefix='/article')
 
 
 

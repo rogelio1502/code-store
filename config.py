@@ -1,4 +1,7 @@
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 SECRET_KEY = os.urandom(32)
 
@@ -10,7 +13,7 @@ DEBUG = True
 
 # Connect to the database 
 #our database url
-SQLALCHEMY_DATABASE_URI = 'uri'
+SQLALCHEMY_DATABASE_URI = os.getenv('uri')
 
 # Turn off the Flask-SQLAlchemy event system and warning
 SQLALCHEMY_TRACK_MODIFICATIONS = False
