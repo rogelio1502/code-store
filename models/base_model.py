@@ -75,3 +75,5 @@ class Base(object):
         if obj_query is not None:
             return obj_query.serialize
         return {}
+    
+    

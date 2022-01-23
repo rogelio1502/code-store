@@ -20,9 +20,11 @@ class Category(db.Model,Base):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50),nullable=False)
+    status = db.Column(db.Boolean, default=True, nullable=False)
     articles = db.relationship(
         'Article',backref="category", lazy=True
     )
+    
     db.UniqueConstraint(name)
 
     
