@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-SECRET_KEY = os.urandom(32)
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 #Grabs the folder where the script runs
 basedir = os.path.abspath(os.path.dirname(__file__))

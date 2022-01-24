@@ -5,6 +5,7 @@ from models import db
 
 from routes.article_blueprint import article
 from routes.category_blueprint import category
+from routes.user_blueprint import user
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -14,7 +15,7 @@ migrate = Migrate(app, db)
 
 app.register_blueprint(article, url_prefix='/article')
 app.register_blueprint(category, url_prefix='/category')
-
+app.register_blueprint(user, url_prefix="/user")
 
 
 
