@@ -34,5 +34,3 @@ class User(db.Model):
     last_name = db.Column(db.String(75), nullable=False)
     email = db.Column(db.String(70), unique = True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
-
-    

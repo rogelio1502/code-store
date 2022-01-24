@@ -12,7 +12,6 @@ from models import db
 
 load_dotenv()
 
-
 # User Database Route
 # this route sends back list of users users
 @token_required
