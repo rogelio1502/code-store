@@ -1,8 +1,9 @@
 from flask import request, jsonify
 from models.ArticleModel import ArticleModel
+from utils.JwtToken import token_required
 
-
-def store():
+@token_required
+def store(current_user):
     data = request.get_json()
     response = ArticleModel.insert_article(data)
         
@@ -14,7 +15,8 @@ def show_all():
     
     return jsonify(data)
 
-def delete():
+@token_required
+def delete(current_user):
 
     id = request.get_json()["id"]
 
@@ -23,8 +25,8 @@ def delete():
     return {
         "status":done
     }
-
-def update():
+@token_required
+def update(current_user):
 
     data = request.get_json()
 

@@ -32,6 +32,7 @@ def token_required(f):
                 .filter_by(public_id = data['public_id'])\
                 .first()
         except Exception as e:
+            print(e)
             return jsonify({
                 'message' : str(e)
             }), 401
