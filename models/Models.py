@@ -1,5 +1,6 @@
 from . import db
 from .base_model import Base
+from models import base_model
 
 class Article(db.Model,Base):
 
@@ -27,7 +28,7 @@ class Category(db.Model,Base):
     
     db.UniqueConstraint(name)
 
-class User(db.Model):
+class User(db.Model, Base):
     id = db.Column(db.Integer, primary_key = True)
     public_id = db.Column(db.String(150), unique = True)
     name = db.Column(db.String(75), nullable=False)

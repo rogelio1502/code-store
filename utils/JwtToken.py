@@ -9,7 +9,6 @@ from models.UserModel import UserModel as User
 
 load_dotenv()
 
-
 # decorator for verifying the JWT
 def token_required(f):
     @wraps(f)

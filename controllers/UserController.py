@@ -16,20 +16,8 @@ load_dotenv()
 # this route sends back list of users users
 @token_required
 def get_all_user(current_user):
-    # querying the database
-    # for all the entries in it
-    users = User.query.all()
-    # converting the query objects
-    # to list of jsons
-    output = []
-    for user in users:
-        # appending the user data json
-        # to the response list
-        output.append({
-            'public_id': user.public_id,
-            'name' : user.name,
-            'email' : user.email
-        })
+    
+    output = User.get_all_users()
   
     return jsonify({'users': output})
   
@@ -48,9 +36,7 @@ def login():
             {'WWW-Authenticate' : 'Basic realm ="Login required !!"'}
         )
   
-    user = User.query\
-        .filter_by(email = auth.get('email'))\
-        .first()
+    user = User.get_user_by_email(auth.get('email'))
   
     if not user:
         # returns 401 if user does not exist
@@ -68,7 +54,7 @@ def login():
                 'exp' : datetime.utcnow() + timedelta(minutes = int(os.getenv('expiration_minutes')))
             }, 
             os.getenv("SECRET_KEY"),
-            "HS256"
+            "HS256",
             )
         return make_response(jsonify({'token' : token}), 201)
 
@@ -82,29 +68,8 @@ def login():
 # signup route
 def signup():
     # creates a dictionary of the form data
-    data = request.form
-  
-    # gets name, email and password
-    name, email = data.get('name'), data.get('email')
-    password = data.get('password')
-  
-    # checking for existing user
-    user = User.query\
-        .filter_by(email = email)\
-        .first()
-    if not user:
-        # database ORM object
-        user = User(
-            public_id = str(uuid.uuid4()),
-            name = name,
-            email = email,
-            password = generate_password_hash(password)
-        )
-        # insert user
-        db.session.add(user)
-        db.session.commit()
-  
-        return make_response('Successfully registered.', 201)
-    else:
-        # returns 202 if user already exists
-        return make_response('User already exists. Please Log in.', 202)
+    data = request.form.to_dict()
+
+    response = User.create_user(data)
+    
+    return jsonify(response)

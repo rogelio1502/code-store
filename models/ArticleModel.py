@@ -14,6 +14,7 @@ class ArticleModel(Article):
         }
 
     def get_all_articles():
+        
         results = ArticleModel.get_all()
         
         return results
