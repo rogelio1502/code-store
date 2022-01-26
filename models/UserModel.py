@@ -1,5 +1,6 @@
 from .Models import User
 import uuid
+from werkzeug.security import generate_password_hash
 
 class UserModel(User):
 
@@ -22,6 +23,7 @@ class UserModel(User):
         user = UserModel.get_user_by_email(data.get('email'))
         if not user:
             data["public_id"] = str(uuid.uuid4())
+            data["password"] = generate_password_hash(data['password'])
             new_user = UserModel.insert(data)
             
             return new_user

@@ -1,11 +1,10 @@
 import jwt
-import uuid
 import os
 from datetime import datetime, timedelta
 
 from dotenv import load_dotenv
 from flask import jsonify, request, make_response
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import check_password_hash
 from utils.JwtToken import token_required
 from models.UserModel import UserModel as User
 from models import db
